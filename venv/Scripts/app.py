@@ -5,7 +5,7 @@
 # print(str[::-1])
 print("the {q} {b} {f}".format(q='quick', b='brown', f='fox'))
 name = "gilad"
-age = 3
+age = 4
 print(f"{name} is {age} years old")
 
 x = [
