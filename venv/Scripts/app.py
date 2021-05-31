@@ -3,7 +3,7 @@ print(str[::-1])
 print("the {q} {b} {f}".format(q='quick', b='brown', f='fox'))
 
 # f-strings example
-nnn="asdasdas"
+nnn="asdasdasasd"
 print(f"the {nnn}")
 
 name = "gilads"
