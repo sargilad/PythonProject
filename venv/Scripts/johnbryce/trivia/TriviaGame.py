@@ -15,11 +15,14 @@ for question_section in questions_sections_list:
     trivia_question.set_correct_answer(config_parser.get(question_section, 'correct_answer'))
     trivia_questions.add_question(trivia_question)
 
-# Get random number
-
+# Get random question
 random_questions = random.sample(trivia_questions.get_questions(), len(trivia_questions.get_questions()))
 for random_question in random_questions:
     print(random_question.get_question())
     print(random_question.parse_available_answers())
-    ans = input()
-# question1.calc_answer(input())
+    random_question.calc_answer(input())
+
+# calculate final result
+trivia_questions.calc_final_score()
+
+# TODO constants, is there a main

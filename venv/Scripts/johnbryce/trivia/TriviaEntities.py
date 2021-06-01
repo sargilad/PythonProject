@@ -58,4 +58,11 @@ class TriviaQuestions:
 
     def get_questions(self):
         return self._questions_list
-    # def calc_final_score(self):
+
+    def calc_final_score(self):
+        count = 0
+        for question in self._questions_list:
+            if question.get_score() == 1:
+                count += 1
+
+        print(f"you scored {count} out of {len(self._questions_list)}")
