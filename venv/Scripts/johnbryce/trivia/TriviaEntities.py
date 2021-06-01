@@ -1,4 +1,4 @@
-class MyTriviaClass:
+class TriviaQuestion:
 
     def __init__(self):
         self._question = ""
