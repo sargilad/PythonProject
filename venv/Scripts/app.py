@@ -3,7 +3,7 @@ print(str[::-1])
 print("the {q} {b} {f}".format(q='quick', b='brown', f='fox'))
 
 # f-strings example
-nnn="asdasdas"
+nnn = "asdasdas"
 print(f"the {nnn}")
 
 name = "gilad"
@@ -29,7 +29,6 @@ x = [
 
 keys = x[2].keys()
 print('foo' in keys)
-
 
 d = {'foo': 100, 'bar': 200, 'baz': 300}
 d.pop("bar")
