@@ -1,9 +1,14 @@
 from myclasses.MySimpleClass import MySimpleClass
 
 cls = MySimpleClass()
-cls.prop = "gil"
-# print(cls.get_name())
-print(cls.prop)
-# cls.del_name()
-print("name=" + cls.get_name())
+cls._name = "gil"
+print(cls.name)
+cls.del_name()
+print(cls.name)
 
+
+name = input("what is your name")
+if name == "gilad":
+    print("Correct")
+else:
+    print("Wrong")
