@@ -1,4 +1,4 @@
-from MySimpleClass import MySimpleClass
+from myclasses.MySimpleClass import MySimpleClass
 
 cls = MySimpleClass()
 cls.prop = "gil"
@@ -6,3 +6,4 @@ cls.prop = "gil"
 print(cls.prop)
 # cls.del_name()
 print("name=" + cls.get_name())
+
