@@ -42,3 +42,17 @@ class TriviaQuestion:
             self._score = 1
         else:
             self._score = 0
+
+
+class TriviaQuestions:
+
+    def __init__(self):
+        self._questions_list = []
+
+    def add_question(self, question):
+        self._questions_list.append(question)
+
+    def get_question_by_index(self, q_index):
+        return self._questions_list[q_index]
+
+    # def calc_final_score(self):
