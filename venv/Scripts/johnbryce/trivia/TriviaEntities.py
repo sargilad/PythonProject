@@ -32,8 +32,9 @@ class TriviaQuestion:
 
     def parse_available_answers(self):
         parsed_answers = ""
-        for answer in self._answers:
-            parsed_answers = parsed_answers + answer + "\n"
+        answers = self._answers.split(",")
+        for answer in answers:
+            parsed_answers = parsed_answers + answer.strip() + "\n"
 
         return parsed_answers
 
@@ -55,4 +56,6 @@ class TriviaQuestions:
     def get_question_by_index(self, q_index):
         return self._questions_list[q_index]
 
+    def get_questions(self):
+        return self._questions_list
     # def calc_final_score(self):

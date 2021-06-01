@@ -1,11 +1,8 @@
 from TriviaEntities import *
 import configparser
+import random
 
-# q = "What is your name"
-# a = ['1.a', '2.b', '3.c', '4.d']
-# ca = '1'
-
-
+# Collect data from config file
 config_parser = configparser.ConfigParser()
 config_parser.read('questions.ini')
 questions_sections_list = config_parser.sections()
@@ -18,8 +15,11 @@ for question_section in questions_sections_list:
     trivia_question.set_correct_answer(config_parser.get(question_section, 'correct_answer'))
     trivia_questions.add_question(trivia_question)
 
-trivia_questions.get_question_by_index(0)
+# Get random number
 
-print("What is your name?")
-# print(question1.parse_available_answers())
+random_questions = random.sample(trivia_questions.get_questions(), len(trivia_questions.get_questions()))
+for random_question in random_questions:
+    print(random_question.get_question())
+    print(random_question.parse_available_answers())
+    ans = input()
 # question1.calc_answer(input())
