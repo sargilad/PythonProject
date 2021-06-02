@@ -18,6 +18,7 @@ class Factory:
                 for row in csv_reader:
                     if row[1] == self.name:
                         return row[0]
+        print(f"id for {self.name} not found")
         return None
 
     def get_orders_by_id(self, id):
@@ -27,6 +28,8 @@ class Factory:
                 for row in csv_reader:
                     if row[1] == id:
                         self.filtered_orders.append(row)
+        else:
+            print(f"id is empty. no orders")
 
     def calc_sum_of_orders(self):
         sum = 0
