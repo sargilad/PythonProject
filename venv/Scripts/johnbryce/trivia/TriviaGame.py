@@ -25,4 +25,5 @@ for random_question in random_questions:
 # calculate final result
 trivia_questions.calc_final_score()
 
-# TODO constants, is there a main
+
+# TODO constants, is there a main, logFiles, try-catch, lambda
