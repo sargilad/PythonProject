@@ -14,10 +14,9 @@ questions_sections_list = config_parser.sections()
 
 trivia_questions = TriviaQuestions()
 for question_section in questions_sections_list:
-    trivia_question = TriviaQuestion()
-    trivia_question.set_question(config_parser.get(question_section, QUESTION))
-    trivia_question.set_available_answers(config_parser.get(question_section, AVAILABLE_ANSWERS))
-    trivia_question.set_correct_answer(config_parser.get(question_section, CORRECT_ANSWER))
+    trivia_question = TriviaQuestion(config_parser.get(question_section, QUESTION),
+                                     config_parser.get(question_section, AVAILABLE_ANSWERS),
+                                     config_parser.get(question_section, CORRECT_ANSWER))
     trivia_questions.add_question(trivia_question)
 
 # Get random question
@@ -29,6 +28,5 @@ for random_question in random_questions:
 
 # calculate final result
 trivia_questions.calc_final_score()
-
 
 # TODO logFiles, try-catch, lambda
