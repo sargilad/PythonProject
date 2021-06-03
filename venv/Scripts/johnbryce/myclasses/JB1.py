@@ -20,6 +20,62 @@ a, b = tpl[0], tpl[len(tpl) - 1]
 b, a = a, b
 
 # Set
-ls1 = [1,2,3,4,5]
-ls2 = [4,5,6,7,8]
-# print("")
+ls1 = [1, 2, 3, 4, 5]
+ls2 = [4, 5, 6, 7, 8]
+sett = {1, 1, 2}
+print(set(ls1) | set(ls2))
+
+print("asd")
+
+
+def pyramid(num: int):
+    for i in range(1, num):
+        print("*" * i)
+    for i in range(num, 0, -1):
+        print("*" * i)
+
+
+pyramid(5)
+
+
+# Hints in method
+def calc(aa: int = 100, bb: int = 200) -> bool:
+    return aa == bb
+
+
+calc1 = calc(aa=200)
+print(calc1)
+
+
+def find_diff(str1: str, str2: str) -> bool:
+    if len(set(str1) & set(str2)) == 0:
+        return False
+
+    else:
+        return True
+
+
+find_diff("asb", "asd")
+
+
+def palyndrom(my_str: str):
+    str_len = len(my_str) - 1
+    for i in range(0, str_len):
+        if my_str[i] != my_str[str_len - i]:
+            return False
+    return True
+
+
+palyndrom("abcba")
+
+
+def is_primer(num: int) -> bool:
+    for i in range(1, num):
+        if i == 1:
+            continue
+        if num % i == 0:
+            return True
+
+    return False
+
+is_primer(6)
