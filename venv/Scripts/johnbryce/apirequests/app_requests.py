@@ -3,30 +3,35 @@ import json
 
 
 class PostsRequests:
-    uri = '/posts'
+    domain = "https://jsonplaceholder.typicode.com/posts/"
     rest_client = None
 
-    def __init__(self, host):
-        self.rest_client = RestClient(host)
+    def __init__(self):
+        self.rest_client = RestClient()
 
-    def get_single_post(self, id: int) -> str:
+    def get_single_post(self, id: int) -> json:
         try:
-            response = self.rest_client.get(self.uri + '/' + str(id))
-            response_code = response.status
+            response = self.rest_client.get(self.domain + str(id))
+            response_code = response.status_code
             if response_code == 200:
-                response_data = response.read().decode("utf-8")
-                return json.loads(response_data)
+                return response.json()
         except Exception as e:
             print(e)
             return None  # might cause NPE
 
-    def get_posts(self):
+    def get_posts(self) -> json:
         try:
-            response = self.rest_client.get(self.uri)
-            response_code = response.status
+            response = self.rest_client.get(self.domain)
+            response_code = response.status_code
             if response_code == 200:
-                response_data = response.read().decode("utf-8")
-                return json.loads(response_data)
+                return response.json()
         except Exception as e:
             print(e)
             return None  # might cause NPE
+
+    def create_post(self, body):
+        try:
+            self.rest_client.post(self.domain, body, "{'Content-type': 'application/json; charset=UTF-8',}")
+        except Exception as e:
+            print(e)
+            return None

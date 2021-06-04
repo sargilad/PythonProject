@@ -1,19 +1,12 @@
-import http.client
+import requests
 
 
 class RestClient:
-    host = ""
-    conn = None
-
-    def __init__(self, host):
-        self.host = host
-        self.conn = http.client.HTTPConnection(host,None, 5)
+    def __init__(self):
+        pass
 
     def get(self, url):
-        self.conn.request("GET", url)
-        return self.conn.getresponse()
+        return requests.get(url)
 
-
-
-
-
+    def post(self, url, body, headers_list):
+        return requests.post(url, data=body, headers=headers_list)
