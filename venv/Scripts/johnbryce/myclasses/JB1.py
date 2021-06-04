@@ -74,8 +74,18 @@ def is_primer(num: int) -> bool:
         if i == 1:
             continue
         if num % i == 0:
-            return True
+            return False
 
-    return False
+    return True
 
-is_primer(6)
+
+def get_primers_count(num: int) -> int:
+    primer_counter = 0
+    for i in range(1, num):
+        if is_primer(i):
+            primer_counter += 1
+
+    return primer_counter
+
+
+get_primers_count(7)
