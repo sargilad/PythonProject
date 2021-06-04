@@ -1,6 +1,8 @@
-from api_factory import RestClient
+from app_requests import PostsRequests
+HOST = "jsonplaceholder.typicode.com"
 
-restClient = RestClient("jsonplaceholder.typicode.com")
-http_response = restClient.get("https://jsonplaceholder.typicode.com/posts/1")
-http_response.status
-print("asd")
+posts_requests = PostsRequests(HOST)
+response = posts_requests.get_posts()
+response = posts_requests.get_single_post(1)
+print(response)
+
