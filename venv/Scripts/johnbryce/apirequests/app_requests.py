@@ -31,7 +31,10 @@ class PostsRequests:
 
     def create_post(self, body):
         try:
-            self.rest_client.post(self.domain, body, "{'Content-type': 'application/json; charset=UTF-8',}")
+            response = self.rest_client.post(self.domain, body, {'Content-type': 'application/json; charset=UTF-8',})
+            response_code = response.status_code
+            if response_code == 200:
+                return response.json()
         except Exception as e:
             print(e)
             return None
