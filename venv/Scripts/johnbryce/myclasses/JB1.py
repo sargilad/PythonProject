@@ -58,15 +58,16 @@ def find_diff(str1: str, str2: str) -> bool:
 find_diff("asb", "asd")
 
 
-def palyndrom(my_str: str):
+def palindrome(my_str: str):
     str_len = len(my_str) - 1
-    for i in range(0, str_len):
+    for i in range(0, str_len + 1):
         if my_str[i] != my_str[str_len - i]:
             return False
     return True
 
 
-palyndrom("abcba")
+palindrome("abcba")
+palindrome("abccba")
 
 
 def is_primer(num: int) -> bool:
@@ -88,4 +89,27 @@ def get_primers_count(num: int) -> int:
     return primer_counter
 
 
-get_primers_count(7)
+get_primers_count(0)
+
+
+def analyze_class(students: dict, fail: int = 65, excel: int = 95) -> dict:
+    excel_students = []
+    fail_students = []
+    other_students = []
+
+    for st in students:
+        if int(students[st]) <= fail:
+            fail_students.append(st)
+        elif int(students[st]) >= excel:
+            excel_students.append(st)
+        else:
+            other_students.append(st)
+
+    students_dict = {'excel': excel_students, 'failed': fail_students, 'others': other_students}
+
+    return students_dict
+
+
+students_lst = {'gil': 100, 'moshe': 40, 'moshe2': 45, 'eli': 66}
+s_dict = analyze_class(students_lst, fail=40)
+print(s_dict)
