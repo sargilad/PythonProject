@@ -79,3 +79,16 @@ class Player:
 
     def get_age(self):
         return self.__age
+
+
+def get_greeting_by_country(country, name):
+    country_dictionary = {"england": "Welcome NAME from COUNTRY. Enjoy the game!",
+                          "portugal": "bem-vindo NAME da COUNTRY. Aproveite o jogo"}
+    greeting_message = ""
+
+    try:
+        greeting_message = country_dictionary[country.lower()]
+    except Exception as e:  # default = english
+        greeting_message = country_dictionary["england"]
+    finally:
+        return greeting_message.replace("NAME", name).replace("COUNTRY", country)
