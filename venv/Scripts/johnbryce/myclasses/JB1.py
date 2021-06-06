@@ -1,4 +1,6 @@
 from MySimpleClass import *
+from person import *
+from vehicle import *
 import random
 
 cls = MySimpleClass()
@@ -113,3 +115,11 @@ def analyze_class(students: dict, fail: int = 65, excel: int = 95) -> dict:
 students_lst = {'gil': 100, 'moshe': 40, 'moshe2': 45, 'eli': 66}
 s_dict = analyze_class(students_lst, fail=40)
 print(s_dict)
+
+# vehicle = __Vehicle()
+# vehicle.set_max_speed(1)
+bus = Bus()
+
+
+student = Student("asdasd", "asdasd", 100)
+print("asd")
