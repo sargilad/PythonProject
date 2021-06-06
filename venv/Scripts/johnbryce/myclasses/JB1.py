@@ -59,9 +59,9 @@ find_diff("asb", "asd")
 
 
 def palindrome(my_str: str):
-    str_len = len(my_str) - 1
-    for i in range(0, str_len + 1):
-        if my_str[i] != my_str[str_len - i]:
+    str_len = len(my_str)
+    for i in range(0, str_len):
+        if my_str[i] != my_str[str_len - 1 - i]:
             return False
     return True
 
