@@ -21,12 +21,13 @@ for question_section in questions_sections_list:
 
 name = input("What is your name?\n")
 age = input("What is your age?\n")
-country = input("What is your country?")
+country = input("What is your country?\n")
 
 if int(age) < 16:
     print("You are under aged. Game aborted")
 else:
     player = Player(name, age, country)
+    print(f"Welcome {name} from {country}. Enjoy the game!\n")
 
     # Get random question
     random_questions = random.sample(trivia_questions.get_questions(), len(trivia_questions.get_questions()))
