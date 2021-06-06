@@ -1,4 +1,5 @@
 class MySimpleClass:
+    _priv = None
 
     def __init__(self):
         print('init name')
@@ -24,6 +25,7 @@ class MySimpleClass:
 
     def to_override(self):
         print("origin")
+
     # prop = property(get_name, set_name, del_name)
 
     def must_implement(self):
@@ -36,3 +38,5 @@ class InheritClass(MySimpleClass):
 
     def to_override(self):
         print("overrided")
+
+
