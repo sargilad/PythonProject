@@ -6,6 +6,7 @@ import random
 CORRECT_ANSWER = 'correct_answer'
 AVAILABLE_ANSWERS = 'available_answers'
 QUESTION = 'question'
+QUESTION_SCORE = 'question_score'
 
 
 def main():
@@ -16,9 +17,10 @@ def main():
 
     trivia_questions = TriviaQuestions()
     for question_section in questions_sections_list:
-        trivia_question = TriviaQuestion(config_parser.get(question_section, QUESTION),
-                                         config_parser.get(question_section, AVAILABLE_ANSWERS),
-                                         config_parser.get(question_section, CORRECT_ANSWER))
+        trivia_question = TriviaQuestion(question=config_parser.get(question_section, QUESTION),
+                                         answers=config_parser.get(question_section, AVAILABLE_ANSWERS),
+                                         question_score=config_parser.get(question_section, QUESTION_SCORE),
+                                         correct_answer=config_parser.get(question_section, CORRECT_ANSWER))
         trivia_questions.add_question(trivia_question)
 
     name = input("What is your name?\n")

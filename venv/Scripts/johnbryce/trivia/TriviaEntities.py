@@ -1,16 +1,23 @@
 class TriviaQuestion:
     question = ""
+    question_score: int = 0
     answers = ""
     correctAnswer = ""
-    score = ""
+    score = 0
 
-    def __init__(self, question, answers, correct_answer):
+    # todo:change to private
+
+    def __init__(self, question, question_score, answers, correct_answer):
         self.question = question
         self.answers = answers
+        self.question_score = question_score
         self.correctAnswer = correct_answer
 
     def get_question(self):
         return self.question
+
+    def get_question_score(self):
+        return self.question_score
 
     def get_available_answers(self):
         return self.answers
@@ -31,12 +38,12 @@ class TriviaQuestion:
 
     def calc_answer(self, user_answer):
         if self.correctAnswer == user_answer:
-            self.score = 1
-        else:
-            self.score = 0
+            self.score = self.question_score
 
 
 class TriviaQuestions:
+    __final_score: int = 0
+
     def __init__(self):
         self.questions_list = []
 
@@ -50,11 +57,11 @@ class TriviaQuestions:
         return self.questions_list
 
     def calc_final_score(self) -> str:
-        count = 0
+        __final_score: int = 0
         for question in self.questions_list:
-            if question.get_score() == 1:
-                count += 1
-        return f"{count} out of {len(self.questions_list)}"
+            __final_score += int(question.get_score())
+
+        return __final_score
 
 
 class Player:
@@ -88,7 +95,7 @@ def get_greeting_by_country(country, name):
 
     try:
         greeting_message = country_dictionary[country.lower()]
-    except Exception as e:  # default = english
+    except KeyError as e:  # default = english
         greeting_message = country_dictionary["england"]
     finally:
         return greeting_message.replace("NAME", name).replace("COUNTRY", country)
