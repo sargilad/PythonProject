@@ -19,14 +19,23 @@ for question_section in questions_sections_list:
                                      config_parser.get(question_section, CORRECT_ANSWER))
     trivia_questions.add_question(trivia_question)
 
-# Get random question
-random_questions = random.sample(trivia_questions.get_questions(), len(trivia_questions.get_questions()))
-for random_question in random_questions:
-    print(random_question.get_question())
-    print(random_question.parse_available_answers())
-    random_question.calc_answer(input())
+name = input("What is your name?\n")
+age = input("What is your age?\n")
+country = input("What is your country?")
 
-# calculate final result
-trivia_questions.calc_final_score()
+if int(age) < 16:
+    print("You are under aged. Game aborted")
+else:
+    player = Player(name, age, country)
 
-# TODO logFiles, try-catch, lambda
+    # Get random question
+    random_questions = random.sample(trivia_questions.get_questions(), len(trivia_questions.get_questions()))
+    for random_question in random_questions:
+        print(random_question.get_question())
+        print(random_question.parse_available_answers())
+        random_question.calc_answer(input())
+
+    # calculate final result
+    score = trivia_questions.calc_final_score()
+    player.set_score(score)
+    print(f"{player.get_name()} - your score is {player.get_score()}")

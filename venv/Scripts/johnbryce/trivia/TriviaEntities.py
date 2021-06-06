@@ -49,10 +49,33 @@ class TriviaQuestions:
     def get_questions(self):
         return self.questions_list
 
-    def calc_final_score(self):
+    def calc_final_score(self) -> str:
         count = 0
         for question in self.questions_list:
             if question.get_score() == 1:
                 count += 1
+        return f"{count} out of {len(self.questions_list)}"
 
-        print(f"you scored {count} out of {len(self.questions_list)}")
+
+class Player:
+    __name: str = ""
+    __age: str = ""
+    __score: str = ""
+    __country: str = ""
+
+    def __init__(self, name: str, age: str, country: str):
+        self.__name = name
+        self.__age = age
+        self.__country = country
+
+    def set_score(self, score: str):
+        self.__score = score
+
+    def get_score(self):
+        return self.__score
+
+    def get_name(self):
+        return self.__name
+
+    def get_age(self):
+        return self.__age
