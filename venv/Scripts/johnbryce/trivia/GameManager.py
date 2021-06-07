@@ -1,4 +1,5 @@
 from TriviaEntities import *
+from csvfactory import HighScoreManager
 import configparser
 import random
 
@@ -10,6 +11,23 @@ QUESTION_SCORE = 'question_score'
 
 
 def main():
+    # read high score
+    # manager = HighScoreManager("high_score.csv")
+
+    # data = [{'name': 'moshe', 'score': 50},{'name': 'david', 'score': 70}]
+    # manager.write_file(data)
+
+    # dict = manager.read_file()
+
+
+    # manager.is_new_high_score(30)
+
+    # data1 = {'name': 'simon', 'score': 80}
+    # manager.append_file(data1)
+
+    # manager.add_high_score_to_file(data1)
+
+
     # Collect data from config file
     config_parser = configparser.ConfigParser()
     config_parser.read('questions.ini')
