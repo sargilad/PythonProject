@@ -1,15 +1,23 @@
 import math
 
+from abc import *
 
-class Shape:
+
+# abstract class
+class Shape(ABC):
+    @abstractmethod
     def get_area(self):
         pass
 
+    @abstractmethod
     def get_perimeter(self):
         pass
 
 
-class Ellipse:
+class Ellipse(Shape):
+    def get_perimeter(self, a, b):
+        return a + b
+
     radius: int
 
     def get_area(self):
