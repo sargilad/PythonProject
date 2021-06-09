@@ -58,6 +58,48 @@ class RestRequests:
             print(e)
             return None
 
+    def create_work_package(self, body) -> json:
+        try:
+            response = self.rest_client.post(self.work_pkg_url, body, self._build_request_header())
+            if response.status_code == HTTPStatus.CREATED:
+                print(f"package CREATE: {response.json()}")
+                return response.json()
+        except Exception as e:
+            print(e)
+            return None
+
+    def get_work_package(self, id: int) -> json:
+        try:
+            response = self.rest_client.get(self.work_pkg_url + str(id), self._build_request_header())
+            if response.status_code == HTTPStatus.OK:
+                print(f"package GET: {response.json()}")
+                return response.json()
+        except Exception as e:
+            print(e)
+            return None  # might cause NPE
+
+    def update_work_package(self, id, body):
+        try:
+            response = self.rest_client.patch(url=self.work_pkg_url + str(id), body=body,
+                                              headers_list=self._build_request_header())
+            if response.status_code == HTTPStatus.OK:
+                print(f"package PATCH: {response.json()}")
+                return response.json()
+        except Exception as e:
+            print(e)
+            return None
+
+    def delete_work_package(self, id:int, body:dict={}):
+        try:
+            response = self.rest_client.delete(self.work_pkg_url + str(id), body, self._build_request_header())
+            response_code = response.status_code
+            if response_code == HTTPStatus.NO_CONTENT:
+                print(f"package DELETE: success")
+                return ""
+        except Exception as e:
+            print(e)
+            return None
+
     def _build_request_header(self) -> dict:
         return {self._HeadersEnum.AUTHORIZATION.value: 'Basic ' + self.api_token,
                 self._HeadersEnum.CONTENT_TYPE.value: self._HeadersEnum.APPLICATION_JSON.value}
