@@ -37,35 +37,26 @@ class RestRequests:
             print(e)
             return None  # might cause NPE
 
-    def update_project(self, body):
+    def update_project(self, id, body):
         try:
-            response = self.rest_client.post(self.domain, body, {'Content-type': 'application/json; charset=UTF-8', })
-            response_code = response.status_code
-            if response_code == 200:
+            response = self.rest_client.patch(self.projects_url + str(id), body, {
+                HeadersEnum.AUTHORIZATION.value: 'Basic ' + self.api_token, })
+            if response.status_code == HTTPStatus.OK:
                 return response.json()
         except Exception as e:
             print(e)
             return None
 
-    def delete_project(self, body):
+    def delete_project(self, id, body):
         try:
-            response = self.rest_client.post(self.domain, body, {'Content-type': 'application/json; charset=UTF-8', })
+            response = self.rest_client.delete(self.projects_url + str(id), body, {
+                HeadersEnum.AUTHORIZATION.value: 'Basic ' + self.api_token, })
             response_code = response.status_code
-            if response_code == HTTPStatus.CREATED:
-                return response.json()
+            if response_code == HTTPStatus.NO_CONTENT:
+                return ""
         except Exception as e:
             print(e)
             return None
-
-    def get_posts(self) -> json:
-        try:
-            response = self.rest_client.get(self.domain)
-            response_code = response.status_code
-            if response_code == 200:
-                return response.json()
-        except Exception as e:
-            print(e)
-            return None  # might cause NPE
 
 
 class HeadersEnum(Enum):

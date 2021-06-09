@@ -11,12 +11,23 @@ def main():
     posts_requests = RestRequests(domain, api_token)
 
     # create project
-    body = entities.get_project_create_body(CommonUtilities.get_random_string(prefix="project_"))
+    body = entities.get_project_create_body(CommonUtilities.get_random_string(prefix="dummy_"))
     project = posts_requests.create_project(body)
 
     # Get project
     project = posts_requests.get_single_project(project['id'])
+
+    # Update project
+    body = entities.get_project_update_body("This is a project description")
+    project = posts_requests.update_project(project['id'], body)
+
+    # Delete project
+    project = posts_requests.delete_project(project['id'], {})
+
+
     print()
+
+
 
 
 

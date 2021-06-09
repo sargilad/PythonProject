@@ -4,3 +4,10 @@ class OpenProjectEntities:
         return {
             "name": project_name,
         }
+
+    def get_project_update_body(self, description):
+        return {
+            "description": {
+                "raw": description
+            }
+        }
