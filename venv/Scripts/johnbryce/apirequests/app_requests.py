@@ -1,3 +1,4 @@
+import time
 from enum import Enum
 from http import HTTPStatus
 
@@ -28,9 +29,20 @@ class RestRequests:
             print(e)
             return None
 
-    def get_single_project(self, id: int) -> json:
+    def get_single_project(self, id: int, expected_status: HTTPStatus = HTTPStatus.OK, attempts: int = 1) -> json:
         try:
-            response = self.rest_client.get(url=self.projects_url + str(id), headers_list=self._build_request_header())
+            response = None
+            attempt = 1
+            while attempt <= attempts:
+                response = self.rest_client.get(url=self.projects_url + str(id),
+                                                headers_list=self._build_request_header())
+                if response.status_code == expected_status:
+                    break
+                else:
+                    attempt += 1
+                    print("attempt")
+                    time.sleep(1)
+
             if response.status_code == HTTPStatus.OK:
                 print(f"project GET: {response.json()}")
                 return response.json()

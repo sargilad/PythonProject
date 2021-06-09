@@ -44,8 +44,7 @@ def main():
     status = rest_requests.delete_project(id=project['id'], body={})
     # Check status == HTTPStatus.NO_CONTENT
 
-    # time.sleep(2) #todo: fix
-    project = rest_requests.get_single_project(id=project['id'])
+    project = rest_requests.get_single_project(id=project['id'], expected_status=HTTPStatus.NOT_FOUND, attempts=5)
     # Assert project = {}
 
     # Create work package
@@ -59,13 +58,11 @@ def main():
     pkg = rest_requests.create_work_package(body=body)
     # pkg['subject'] == name
 
-
     # GET work package
     pkg = rest_requests.get_work_package(id=pkg['id'])
     # task and package
     # pkg['_links']['type']['title'] == 'Task'
     # pkg['subject'] == pkg_name
-
 
     # update work package
     lock_version = pkg['lockVersion']
@@ -73,7 +70,6 @@ def main():
     body = entities.get_work_package_update_body(lock_version=lock_version, description=package_description)
     pkg = rest_requests.update_work_package(id=pkg['id'], body=body)
     # pkg['description']['raw'] == package_description
-
 
     # delete work package
     status = rest_requests.delete_work_package(id=pkg['id'])
