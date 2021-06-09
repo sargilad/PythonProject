@@ -29,7 +29,7 @@ class RestRequests:
             print(e)
             return None
 
-    def get_single_project(self, id: int, expected_status: HTTPStatus = HTTPStatus.OK, attempts: int = 1) -> json:
+    def get_single_project(self, id: int, expected_status: int = HTTPStatus.OK, attempts: int = 1) -> json:
         try:
             response = None
             attempt = 1
@@ -64,7 +64,7 @@ class RestRequests:
             print(e)
             return None
 
-    def delete_project(self, id, body) -> HTTPStatus:
+    def delete_project(self, id, body) -> int:
         try:
             response = self.rest_client.delete(url=self.projects_url + str(id), body=body,
                                                headers_list=self._build_request_header())
@@ -73,7 +73,7 @@ class RestRequests:
                 return HTTPStatus.NO_CONTENT
         except Exception as e:
             print(e)
-            return None
+            return HTTPStatus.EXPECTATION_FAILED
 
     def create_work_package(self, body) -> json:
         try:
@@ -110,7 +110,7 @@ class RestRequests:
             print(e)
             return None
 
-    def delete_work_package(self, id: int, body: dict = {}) -> HTTPStatus:
+    def delete_work_package(self, id: int, body: dict = {}) -> int:
         try:
             response = self.rest_client.delete(url=self.work_pkg_url + str(id), body=body,
                                                headers_list=self._build_request_header())
@@ -119,7 +119,7 @@ class RestRequests:
                 return HTTPStatus.NO_CONTENT
         except Exception as e:
             print(e)
-            return None
+            return HTTPStatus.EXPECTATION_FAILED
 
     def _build_request_header(self) -> dict:
         return {self._HeadersEnum.AUTHORIZATION.value: 'Basic ' + self.api_token,

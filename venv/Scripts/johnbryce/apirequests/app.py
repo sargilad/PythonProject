@@ -1,10 +1,9 @@
-import time
+import configparser
 from http import HTTPStatus
 
 from app_requests import RestRequests
 from rest_entities import OpenProjectEntities
 from utilities import CommonUtilities
-import configparser
 
 config_parser = configparser.ConfigParser()
 config_parser.read('config.ini')
