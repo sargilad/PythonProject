@@ -19,8 +19,7 @@ class RestRequests:
 
     def create_project(self, body) -> json:
         try:
-            response = self.rest_client.post(self.projects_url, body, {
-                HeadersEnum.AUTHORIZATION.value: 'Basic ' + self.api_token, })
+            response = self.rest_client.post(self.projects_url, body, self._build_request_header())
             if response.status_code == HTTPStatus.CREATED:
                 return response.json()
         except Exception as e:
@@ -29,8 +28,7 @@ class RestRequests:
 
     def get_single_project(self, id: int) -> json:
         try:
-            response = self.rest_client.get(self.projects_url + str(id), {
-                HeadersEnum.AUTHORIZATION.value: 'Basic ' + self.api_token, })
+            response = self.rest_client.get(self.projects_url + str(id), self._build_request_header())
             if response.status_code == HTTPStatus.OK:
                 return response.json()
         except Exception as e:
@@ -39,8 +37,7 @@ class RestRequests:
 
     def update_project(self, id, body):
         try:
-            response = self.rest_client.patch(self.projects_url + str(id), body, {
-                HeadersEnum.AUTHORIZATION.value: 'Basic ' + self.api_token, })
+            response = self.rest_client.patch(self.projects_url + str(id), body, self._build_request_header())
             if response.status_code == HTTPStatus.OK:
                 return response.json()
         except Exception as e:
@@ -49,8 +46,7 @@ class RestRequests:
 
     def delete_project(self, id, body):
         try:
-            response = self.rest_client.delete(self.projects_url + str(id), body, {
-                HeadersEnum.AUTHORIZATION.value: 'Basic ' + self.api_token, })
+            response = self.rest_client.delete(self.projects_url + str(id), body, self._build_request_header())
             response_code = response.status_code
             if response_code == HTTPStatus.NO_CONTENT:
                 return ""
@@ -58,8 +54,12 @@ class RestRequests:
             print(e)
             return None
 
+    def _build_request_header(self) -> dict:
+        return {_HeadersEnum.AUTHORIZATION.value: 'Basic ' + self.api_token,
+                _HeadersEnum.CONTENT_TYPE.value: _HeadersEnum.APPLICATION_JSON.value}
 
-class HeadersEnum(Enum):
+
+class _HeadersEnum(Enum):
     CONTENT_TYPE = 'Content-type'
     APPLICATION_JSON = 'application/json; charset=UTF-8'
     AUTHORIZATION = 'Authorization'

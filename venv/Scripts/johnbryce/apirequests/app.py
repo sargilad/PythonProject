@@ -25,6 +25,7 @@ def main():
     project = posts_requests.delete_project(project['id'], {})
 
 
+
     print()
 
 
