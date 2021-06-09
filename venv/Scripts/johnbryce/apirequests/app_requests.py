@@ -21,6 +21,7 @@ class RestRequests:
         try:
             response = self.rest_client.post(self.projects_url, body, self._build_request_header())
             if response.status_code == HTTPStatus.CREATED:
+                print(f"project CREATE: {response.json()}")
                 return response.json()
         except Exception as e:
             print(e)
@@ -30,6 +31,7 @@ class RestRequests:
         try:
             response = self.rest_client.get(self.projects_url + str(id), self._build_request_header())
             if response.status_code == HTTPStatus.OK:
+                print(f"project GET: {response.json()}")
                 return response.json()
         except Exception as e:
             print(e)
@@ -39,6 +41,7 @@ class RestRequests:
         try:
             response = self.rest_client.patch(self.projects_url + str(id), body, self._build_request_header())
             if response.status_code == HTTPStatus.OK:
+                print(f"project PATCH: {response.json()}")
                 return response.json()
         except Exception as e:
             print(e)
@@ -49,17 +52,17 @@ class RestRequests:
             response = self.rest_client.delete(self.projects_url + str(id), body, self._build_request_header())
             response_code = response.status_code
             if response_code == HTTPStatus.NO_CONTENT:
+                print(f"project DELETE: success")
                 return ""
         except Exception as e:
             print(e)
             return None
 
     def _build_request_header(self) -> dict:
-        return {_HeadersEnum.AUTHORIZATION.value: 'Basic ' + self.api_token,
-                _HeadersEnum.CONTENT_TYPE.value: _HeadersEnum.APPLICATION_JSON.value}
+        return {self._HeadersEnum.AUTHORIZATION.value: 'Basic ' + self.api_token,
+                self._HeadersEnum.CONTENT_TYPE.value: self._HeadersEnum.APPLICATION_JSON.value}
 
-
-class _HeadersEnum(Enum):
-    CONTENT_TYPE = 'Content-type'
-    APPLICATION_JSON = 'application/json; charset=UTF-8'
-    AUTHORIZATION = 'Authorization'
+    class _HeadersEnum(Enum):
+        CONTENT_TYPE = 'Content-type'
+        APPLICATION_JSON = 'application/json; charset=UTF-8'
+        AUTHORIZATION = 'Authorization'

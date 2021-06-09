@@ -1,10 +1,14 @@
 from app_requests import RestRequests
 from rest_entities import OpenProjectEntities
 from utilities import CommonUtilities
+import configparser
 
-# todo: bring from config file
-domain = "https://jbfinal3.openproject.com/"
-api_token = "YXBpa2V5OjE5ZjgxMjM1ZGRiMjVjMDM2N2RjMjA2YjE4MTFmZGUwMzViYWU5NWIzOTg1MGY1N2I3Mjk0ZTc5ODUxYTg4YWI="
+config_parser = configparser.ConfigParser()
+config_parser.read('config.ini')
+questions_sections_list = config_parser.sections()
+
+domain = config_parser['env']['domain']
+api_token = config_parser['user']['api_token']
 
 def main():
     entities = OpenProjectEntities()
@@ -24,9 +28,10 @@ def main():
     # Delete project
     project = posts_requests.delete_project(project['id'], {})
 
+    
 
 
-    print()
+
 
 
 
