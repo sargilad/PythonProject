@@ -17,7 +17,7 @@ class RestRequests:
         self.work_pkg_url = domain + "api/v3/work_packages/"
         self.api_token = api_token
 
-    def create_project(self, body):
+    def create_project(self, body) -> json:
         try:
             response = self.rest_client.post(self.projects_url, body, {
                 HeadersEnum.AUTHORIZATION.value: 'Basic ' + self.api_token, })
@@ -29,9 +29,9 @@ class RestRequests:
 
     def get_single_project(self, id: int) -> json:
         try:
-            response = self.rest_client.get(self.domain + str(id))
-            response_code = response.status_code
-            if response_code == 200:
+            response = self.rest_client.get(self.projects_url + str(id), {
+                HeadersEnum.AUTHORIZATION.value: 'Basic ' + self.api_token, })
+            if response.status_code == HTTPStatus.OK:
                 return response.json()
         except Exception as e:
             print(e)
