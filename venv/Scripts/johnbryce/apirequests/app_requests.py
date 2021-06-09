@@ -19,7 +19,8 @@ class RestRequests:
 
     def create_project(self, body) -> json:
         try:
-            response = self.rest_client.post(self.projects_url, body, self._build_request_header())
+            response = self.rest_client.post(url=self.projects_url, body=body,
+                                             headers_list=self._build_request_header())
             if response.status_code == HTTPStatus.CREATED:
                 print(f"project CREATE: {response.json()}")
                 return response.json()
@@ -29,17 +30,21 @@ class RestRequests:
 
     def get_single_project(self, id: int) -> json:
         try:
-            response = self.rest_client.get(self.projects_url + str(id), self._build_request_header())
+            response = self.rest_client.get(url=self.projects_url + str(id), headers_list=self._build_request_header())
             if response.status_code == HTTPStatus.OK:
                 print(f"project GET: {response.json()}")
                 return response.json()
+            elif response.status_code == HTTPStatus.NOT_FOUND:
+                print(f"Project id {id} not found")
+                return {}
         except Exception as e:
             print(e)
-            return None  # might cause NPE
+            return None
 
     def update_project(self, id, body):
         try:
-            response = self.rest_client.patch(self.projects_url + str(id), body, self._build_request_header())
+            response = self.rest_client.patch(url=self.projects_url + str(id), body=body,
+                                              headers_list=self._build_request_header())
             if response.status_code == HTTPStatus.OK:
                 print(f"project PATCH: {response.json()}")
                 return response.json()
@@ -47,20 +52,21 @@ class RestRequests:
             print(e)
             return None
 
-    def delete_project(self, id, body):
+    def delete_project(self, id, body) -> HTTPStatus:
         try:
-            response = self.rest_client.delete(self.projects_url + str(id), body, self._build_request_header())
-            response_code = response.status_code
-            if response_code == HTTPStatus.NO_CONTENT:
-                print(f"project DELETE: success")
-                return ""
+            response = self.rest_client.delete(url=self.projects_url + str(id), body=body,
+                                               headers_list=self._build_request_header())
+            if response.status_code == HTTPStatus.NO_CONTENT:
+                print(f"project deleted")
+                return HTTPStatus.NO_CONTENT
         except Exception as e:
             print(e)
             return None
 
     def create_work_package(self, body) -> json:
         try:
-            response = self.rest_client.post(self.work_pkg_url, body, self._build_request_header())
+            response = self.rest_client.post(url=self.work_pkg_url, body=body,
+                                             headers_list=self._build_request_header())
             if response.status_code == HTTPStatus.CREATED:
                 print(f"package CREATE: {response.json()}")
                 return response.json()
@@ -70,10 +76,13 @@ class RestRequests:
 
     def get_work_package(self, id: int) -> json:
         try:
-            response = self.rest_client.get(self.work_pkg_url + str(id), self._build_request_header())
+            response = self.rest_client.get(url=self.work_pkg_url + str(id), headers_list=self._build_request_header())
             if response.status_code == HTTPStatus.OK:
                 print(f"package GET: {response.json()}")
                 return response.json()
+            elif response.status_code == HTTPStatus.NOT_FOUND:
+                print(f"package id {id} not found")
+                return {}
         except Exception as e:
             print(e)
             return None  # might cause NPE
@@ -89,13 +98,13 @@ class RestRequests:
             print(e)
             return None
 
-    def delete_work_package(self, id:int, body:dict={}):
+    def delete_work_package(self, id: int, body: dict = {}) -> HTTPStatus:
         try:
-            response = self.rest_client.delete(self.work_pkg_url + str(id), body, self._build_request_header())
-            response_code = response.status_code
-            if response_code == HTTPStatus.NO_CONTENT:
-                print(f"package DELETE: success")
-                return ""
+            response = self.rest_client.delete(url=self.work_pkg_url + str(id), body=body,
+                                               headers_list=self._build_request_header())
+            if response.status_code == HTTPStatus.NO_CONTENT:
+                print(f"Work package deleted")
+                return HTTPStatus.NO_CONTENT
         except Exception as e:
             print(e)
             return None

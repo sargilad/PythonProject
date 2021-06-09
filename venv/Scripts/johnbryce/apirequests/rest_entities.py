@@ -1,8 +1,11 @@
 class OpenProjectEntities:
 
-    def get_project_create_body(self, project_name) -> dict:
+    def get_project_create_body(self, project_name: str, description: str = 'default project description') -> dict:
         return {
             "name": project_name,
+            "description": {
+                "raw": description
+            }
         }
 
     def get_project_update_body(self, description) -> dict:
@@ -26,7 +29,7 @@ class OpenProjectEntities:
             }
         }
 
-    def get_work_package_update_body(self, lock_version: int, description: str = "This is a description") -> dict:
+    def get_work_package_update_body(self, lock_version: int, description: str = "default package description") -> dict:
         return {
             "lockVersion": lock_version,
             "_links": {},
