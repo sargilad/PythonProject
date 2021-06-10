@@ -1,7 +1,9 @@
+import csv
+
 from MySimpleClass import *
 from person import *
 from vehicle import *
-import random
+from shape import *
 
 cls = MySimpleClass()
 cls._name = "gil"
@@ -120,6 +122,61 @@ print(s_dict)
 # vehicle.set_max_speed(1)
 bus = Bus()
 
-
 student = Student("asdasd", "asdasd", 100)
 print("asd")
+
+
+def csv_reader2(file):
+    with open(file) as csv_file:
+        reader = csv.reader(csv_file, delimiter=',')
+        line_count = 0
+        for row in reader:
+            if line_count == 0:
+                print(f'Column names are {", ".join(row)}')
+                line_count += 1
+            else:
+                print(f'\tid={row[0]},  name is= {row[1]}, country is {row[2]}.')
+                line_count += 1
+        print(f'Processed {line_count} lines.')
+
+
+def csv_reader(file):
+    with open(file, newline='') as csv_file:
+        reader = csv.DictReader(csv_file)
+        for row in reader:
+            print(row['id'], row['name'], row['country'])
+
+
+def csv_writer(file):
+    with open(file, 'w', newline='') as csvfile:
+        fieldnames = ['id', 'name', 'country']
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+
+        writer.writeheader()
+        writer.writerow({'id': '10', 'name': 'moshe', 'country': 'israel'})
+        writer.writerow({'id': '20', 'name': 'david', 'country': 'england'})
+
+
+def main():
+    # ellipse = Ellipse()
+    # ellipse.get_perimeter(1, 2)
+    # shape = Shape()
+    # shape.get_perimeter()
+
+    # file = "cust.csv"
+    # f = open(file, 'w')
+    # f.write("id,name,country\n")
+    # f.write("10,dani,new york\n")
+    # f.close()
+    # f = open(file, 'a')
+    # f.write("20,moshe,Tel aviv\n")
+    # f.close()
+    # csv_reader(file)
+
+    csv_writer('cust2.csv')
+    csv_reader('cust2.csv')
+    csv_reader('cust2.csv')
+
+
+if __name__ == "__main__":
+    main()
