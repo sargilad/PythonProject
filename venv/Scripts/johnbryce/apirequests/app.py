@@ -1,4 +1,5 @@
 import configparser
+import time
 from http import HTTPStatus
 
 from app_requests import RestRequests
@@ -27,7 +28,9 @@ def main():
     # project['identifier'] == name
 
     # Get project
+    tic = time.perf_counter()
     project = rest_requests.get_single_project(id=project['id'])
+    toc = time.perf_counter()
     # Assert
     # project['name'] == name
     # project['description']['raw'] == description)

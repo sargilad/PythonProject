@@ -14,6 +14,7 @@ class SeleniumWrapper:
         self.driver = driver
         self.driver_wait = driver_wait
 
+
     def get_element(self, by: By, value: str) -> WebElement:
         try:
             return self.driver.find_element(by, value)
@@ -22,7 +23,7 @@ class SeleniumWrapper:
 
     def wait_for_element(self, by: By, value: str):
         try:
-            self.driver_wait.until(EC.presence_of_element_located((by, value)))
+            self.driver_wait.until(method=EC.presence_of_element_located((by, value)))
         except TimeoutException as toe:
             return None
 
