@@ -12,7 +12,6 @@ add_to_cart_name = "save_to_cart"
 
 class ProductPage(SeleniumWrapper):
 
-
     def increment_product(self, how_many: int,delay_between_clicks=0.2):
         # how many param: how many times we will click on the + button
         for i in range(how_many):
